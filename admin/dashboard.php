@@ -70,67 +70,81 @@ foreach ($grafik_data as $row) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css  " rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css  ">
     <script src="https://cdn.jsdelivr.net/npm/chart.js  "></script>
-    <style>
+     <style>
+        /* =========================================
+           1. GLOBAL & LAYOUT STYLES
+           ========================================= */
         body {
             background-color: #f8f9fa;
             padding-top: 56px;
         }
         @media (min-width: 768px) {
-            body {
-                padding-top: 0;
-            }
+            body { padding-top: 0; }
             .sidebar {
                 position: fixed;
                 top: 0;
                 left: 0;
                 bottom: 0;
-                width: 220px;
+                width: 240px; /* Sedikit diperlebar agar logo muat nyaman */
                 background-color: #343a40;
                 padding-top: 20px;
                 z-index: 1000;
             }
             .main-content {
-                margin-left: 220px;
-                padding: 20px;
+                margin-left: 240px;
+                padding: 25px;
             }
-            .mobile-toggle {
-                display: none !important;
-            }
+            .mobile-toggle { display: none !important; }
         }
         @media (max-width: 767.98px) {
-            .sidebar {
-                display: none;
-            }
-            .main-content {
-                padding: 20px;
-            }
+            .sidebar { display: none; }
+            .main-content { padding: 20px; }
         }
+
+        /* =========================================
+           2. SIDEBAR & NAVIGATION STYLES
+           ========================================= */
         .sidebar .logo {
             text-align: center;
             color: white;
             font-weight: bold;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-size: 1.2rem;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar .logo img {
+            max-height: 70px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 10px;
+            background: white; /* Opsional: agar logo transparan terlihat jelas */
+            border-radius: 8px;
+            padding: 5px;
         }
         .sidebar .nav-link {
             color: #adb5bd;
-            padding: 10px 15px;
+            padding: 12px 20px;
             margin: 4px 10px;
             border-radius: 0 15px 15px 0;
             font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
         .sidebar .nav-link i {
-            width: 20px;
+            width: 22px;
             text-align: center;
-            margin-right: 8px;
+            margin-right: 10px;
         }
         .sidebar .nav-link:hover,
         .sidebar .nav-link.active {
             color: #fff;
-            background-color: #596d8bff;
+            background-color: #596d8b;
         }
         .topbar {
-            background-color: #50617aff;
+            background-color: #50617a;
         }
         .topbar .navbar-brand {
             color: white !important;
@@ -144,53 +158,56 @@ foreach ($grafik_data as $row) {
             border-radius: 4px;
         }
         .offcanvas .nav-link i {
-            width: 20px;
+            width: 22px;
             text-align: center;
             margin-right: 10px;
         }
         .offcanvas .nav-link:hover {
             background-color: #e9ecef;
         }
+
+        /* =========================================
+           3. SUMMARY CARDS STYLES
+           ========================================= */
         .summary-card {
             height: 100%;
             border: none;
-            border-radius: 12px; /* Sudut lebih lembut */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Shadow halus */
-            transition: all 0.3s ease; /* Transisi untuk efek hover */
-            overflow: hidden; /* Pastikan elemen dalam tidak keluar */
-            background: white; /* Latar belakang putih */
-            position: relative; /* Untuk positioning elemen dalam */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: white;
+            position: relative;
         }
         .summary-card::before {
-            /* Garis dekoratif atas */
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #0d6efd, #0dcaf0); /* Gradient biru */
+            background: linear-gradient(90deg, #0d6efd, #0dcaf0);
         }
         .summary-card:hover {
-            transform: translateY(-5px); /* Efek angkat saat hover */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12); /* Shadow lebih dalam saat hover */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
-        .summary-card .card-body {
-            padding: 20px;
-        }
+        .summary-card .card-body { padding: 20px; }
         .summary-card h2 {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 700;
             margin: 0;
             color: #212529;
         }
         .summary-card .card-title {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 8px;
             color: #6c757d;
             display: flex;
             align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .summary-card .card-title i {
             margin-right: 8px;
@@ -201,16 +218,18 @@ foreach ($grafik_data as $row) {
             color: #adb5bd;
             margin: 0;
         }
-        /* Warna ikon judul sesuai dengan konteks */
+        /* Warna ikon spesifik per kartu */
         .summary-card.total-transaksi .card-title i { color: #0d6efd; }
         .summary-card.masuk .card-title i { color: #0dcaf0; }
         .summary-card.proses .card-title i { color: #ffc107; }
         .summary-card.selesai .card-title i { color: #198754; }
         .summary-card.diambil .card-title i { color: #6c757d; }
         .summary-card.users .card-title i { color: #6f42c1; }
-        .summary-card.pendapatan .card-title i { color: #20c997; } /* Warna untuk pendapatan */
+        .summary-card.pendapatan .card-title i { color: #20c997; }
 
-
+        /* =========================================
+           4. GENERAL CARDS & PERINGKAT STYLES
+           ========================================= */
         .card {
             border: none;
             border-radius: 12px;
@@ -219,58 +238,40 @@ foreach ($grafik_data as $row) {
             background: white;
         }
         .card-header {
-            background: white; /* Latar header tetap putih */
+            background: white;
             border-bottom: 1px solid #e9ecef;
             font-weight: 600;
             color: #212529;
             border-radius: 12px 12px 0 0 !important;
             padding: 16px 20px;
         }
-        .card-body {
-            padding: 20px;
-        }
+        .card-body { padding: 20px; }
+        
         .peringkat-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #e9ecef;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f3f5;
         }
-        .peringkat-item:last-child {
-            border-bottom: none;
-        }
+        .peringkat-item:last-child { border-bottom: none; }
         .peringkat-rank {
             font-weight: bold;
             color: #6c757d;
-            min-width: 30px;
+            min-width: 35px;
         }
         .peringkat-nama {
             flex: 1;
             font-weight: 500;
+            color: #495057;
         }
         .peringkat-jumlah {
             background-color: #e9ecef;
-            padding: 2px 8px;
-            border-radius: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
             font-weight: 600;
-        }
-                .sidebar .logo {
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 25px;
-            font-size: 1.3rem; /* Diperbesar */
-            padding: 15px 0; /* Tambahkan padding atas-bawah */
-            display: flex; /* Jadikan flex container */
-            flex-direction: column; /* Arah item: kolom (logo di atas, teks di bawah) */
-            align-items: center; /* Rata tengah secara horizontal */
-            justify-content: center; /* Rata tengah secara vertikal (jika tinggi tetap) */
-        }
-        .sidebar .logo img {
-            max-height: 80px; /* Diperbesar */
-            width: auto;
-            object-fit: contain;
-            margin-bottom: 8px; /* Jarak antara logo dan teks */
+            font-size: 0.85rem;
+            color: #495057;
         }
     </style>
 </head>
