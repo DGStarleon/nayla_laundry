@@ -291,15 +291,46 @@ foreach ($grafik_data as $row) {
         <img src="../img/nayla_laundry.png" alt="Nayla Laundry Logo">
         <span>Nayla Laundry</span>
     </div>
-    <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="bi bi-house-door"></i> Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="user/data.php"><i class="bi bi-people"></i> Kelola User</a></li>
-        <li class="nav-item"><a class="nav-link" href="paket/data_laundry.php"><i class="bi bi-tag"></i> Paket Laundry</a></li>
-        <li class="nav-item"><a class="nav-link" href="transaksi/data_transaksi.php"><i class="bi bi-receipt"></i> Transaksi</a></li>
-        <li class="nav-item"><a class="nav-link" href="laporan/laporan.php"><i class="bi bi-bar-chart"></i> Laporan</a></li>
-        <hr style="border-color: #495057; margin: 15px 10px;">
-        <li class="nav-item"><a class="nav-link text-danger" href="../logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-    </ul>
+<ul class="nav flex-column">
+    <!-- Menu Utama -->
+    <li class="nav-item">
+        <a class="nav-link active" href="dashboard.php">
+            <i class="bi bi-house-door" title="Halaman Utama" aria-label="Dashboard"></i> Dashboard
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="user/data.php">
+            <i class="bi bi-people" title="Manajemen Pengguna" aria-label="Kelola User"></i> Kelola User
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="paket/data_laundry.php">
+            <i class="bi bi-tag" title="Daftar Paket Laundry" aria-label="Paket Laundry"></i> Paket Laundry
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="transaksi/data_transaksi.php">
+            <i class="bi bi-receipt" title="Data Transaksi" aria-label="Transaksi"></i> Transaksi
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="laporan/laporan.php">
+            <i class="bi bi-bar-chart" title="Laporan Sistem" aria-label="Laporan"></i> Laporan
+        </a>
+    </li>
+    
+    <!-- Pemisah Menu (Dibungkus <li> agar valid secara struktur HTML) -->
+    <li class="nav-item my-2">
+        <hr style="border-color: #495057; margin: 0; opacity: 0.5;">
+    </li>
+
+    <!-- Menu Logout -->
+    <li class="nav-item">
+        <a class="nav-link text-danger" href="../logout.php">
+            <i class="bi bi-box-arrow-right" title="Keluar dari Sistem" aria-label="Logout"></i> Logout
+        </a>
+    </li>
+</ul>
 </div>
 
 <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="sidebarMobile">
